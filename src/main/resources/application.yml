@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: postgres
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/desafio-agro
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
