@@ -9,14 +9,19 @@ import java.util.UUID;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-public class FazendaDTO {
+class FazendaDTO {
 
     private UUID id;
     private String nome;
     private String cnpj;
+    private String cidade;
+    private String uf;
+    private String logradouro;
 
 
     static FazendaDTO fromModel(Fazenda fazenda) {
-       return new FazendaDTO(fazenda.getId(), fazenda.getNome(), fazenda.getCnpj());
+        return new FazendaDTO(fazenda.getId(), fazenda.getNome(),
+                fazenda.getCnpj(), fazenda.getCidade(),
+                fazenda.getUf(), fazenda.getLogradouro());
     }
 }
