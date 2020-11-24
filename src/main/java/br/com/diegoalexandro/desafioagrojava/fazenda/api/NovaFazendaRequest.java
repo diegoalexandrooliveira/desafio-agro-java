@@ -1,5 +1,6 @@
 package br.com.diegoalexandro.desafioagrojava.fazenda.api;
 
+import br.com.diegoalexandro.desafioagrojava.core.validacao.Unicidade;
 import br.com.diegoalexandro.desafioagrojava.fazenda.dominio.Fazenda;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -12,10 +13,12 @@ import javax.validation.constraints.Size;
 class NovaFazendaRequest {
 
     @NotEmpty
+    @Unicidade(campo = "nome", entidade = "Fazenda")
     private final String nome;
 
     @CNPJ
     @NotEmpty
+    @Unicidade(campo = "cnpj", entidade = "Fazenda")
     private final String cnpj;
 
     @NotEmpty
