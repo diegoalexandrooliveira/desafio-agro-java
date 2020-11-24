@@ -1,16 +1,15 @@
 package br.com.diegoalexandro.desafioagrojava.core.validacao;
 
-import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.Objects;
 
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 @Component
 public class UnicidadeValidador implements ConstraintValidator<Unicidade, Object> {
 
@@ -30,8 +29,8 @@ public class UnicidadeValidador implements ConstraintValidator<Unicidade, Object
         if (Objects.isNull(valor)) {
             return true;
         }
-        Query query = entityManager.createQuery(String.format("select count(*) from %s where %s = ?1", entidade, campo), Long.class);
+        TypedQuery<Long> query = entityManager.createQuery(String.format("select count(*) from %s where %s = ?1", entidade, campo), Long.class);
         query.setParameter(1, valor);
-        return (Long) query.getSingleResult() == 0L;
+        return query.getSingleResult() == 0L;
     }
 }

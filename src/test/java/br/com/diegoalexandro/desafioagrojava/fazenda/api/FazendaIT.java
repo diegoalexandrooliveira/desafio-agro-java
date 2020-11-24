@@ -93,7 +93,7 @@ class FazendaIT {
     }
 
     @Test
-    @DisplayName("Deve salvar uma fazenda sem erros")
+    @DisplayName("Deve salvar uma fazenda")
     void teste4() throws Exception {
 
         Map<String, String> fazenda = Map.of("nome", "Fazenda do teste",
