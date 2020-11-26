@@ -49,11 +49,10 @@ public class UnicidadeValidador implements ConstraintValidator<Unicidade, Object
         return query.getSingleResult() == 0L;
     }
 
-    @SuppressWarnings("unchecked")
     private Optional<String> recuperaIdDaRequisicao() {
-        Map<String, String> pathVariables = Optional.ofNullable(servletRequest.getAttribute("org.springframework.web.servlet.View.pathVariables"))
-                .map(variables -> (Map<String, String>) variables)
+        Map<?, ?> pathVariables = Optional.ofNullable(servletRequest.getAttribute("org.springframework.web.servlet.View.pathVariables"))
+                .map(variables -> (Map<?, ?>) variables)
                 .orElse(Collections.emptyMap());
-        return Optional.ofNullable(pathVariables.get("id"));
+        return Optional.ofNullable(pathVariables.get("id")).map(Object::toString);
     }
 }
