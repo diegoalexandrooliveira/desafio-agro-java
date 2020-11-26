@@ -34,21 +34,25 @@ public class Fazenda {
     @NotNull
     private Endereco endereco;
 
-    public String getCidade(){
+    public String getCidade() {
         return endereco.getCidade();
     }
 
-    public String getUf(){
+    public String getUf() {
         return endereco.getUf();
     }
 
-    public String getLogradouro(){
+    public String getLogradouro() {
         return endereco.getLogradouro();
     }
 
 
     public static FazendaBuilder builder() {
         return new FazendaBuilder();
+    }
+
+    public void alterarNome(String nome) {
+        this.nome = requireNonNull(nome);
     }
 
     public static final class FazendaBuilder {

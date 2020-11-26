@@ -9,12 +9,17 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
+@Target({
+        ElementType.FIELD,
+        ElementType.PARAMETER
+})
 @Constraint(validatedBy = UnicidadeValidador.class)
 public @interface Unicidade {
     String entidade();
 
     String campo();
+
+    String campoId() default "id";
 
     String message() default "duplicado.";
 

@@ -32,7 +32,7 @@ class UnicidadeValidadorTest {
         when(unicidadeMock.entidade()).thenReturn("Entidade");
         when(unicidadeMock.campo()).thenReturn("id");
 
-        UnicidadeValidador unicidadeValidador = new UnicidadeValidador(entityManagerMock);
+        UnicidadeValidador unicidadeValidador = new UnicidadeValidador(entityManagerMock, null);
 
         unicidadeValidador.initialize(unicidadeMock);
 
@@ -54,7 +54,7 @@ class UnicidadeValidadorTest {
         when(unicidadeMock.entidade()).thenReturn("Entidade");
         when(unicidadeMock.campo()).thenReturn("id");
 
-        UnicidadeValidador unicidadeValidador = new UnicidadeValidador(entityManagerMock);
+        UnicidadeValidador unicidadeValidador = new UnicidadeValidador(entityManagerMock, null);
 
         unicidadeValidador.initialize(unicidadeMock);
 
@@ -76,7 +76,7 @@ class UnicidadeValidadorTest {
         when(unicidadeMock.entidade()).thenReturn("Entidade");
         when(unicidadeMock.campo()).thenReturn("id");
 
-        UnicidadeValidador unicidadeValidador = new UnicidadeValidador(entityManagerMock);
+        UnicidadeValidador unicidadeValidador = new UnicidadeValidador(entityManagerMock, null);
 
         unicidadeValidador.initialize(unicidadeMock);
 

@@ -1,8 +1,10 @@
 package br.com.diegoalexandro.desafioagrojava.fazenda.api;
 
 import br.com.diegoalexandro.desafioagrojava.core.exceptions.EntidadeNaoEncontradaException;
+import br.com.diegoalexandro.desafioagrojava.core.validacao.Unicidade;
 import br.com.diegoalexandro.desafioagrojava.fazenda.dominio.Fazenda;
 import br.com.diegoalexandro.desafioagrojava.fazenda.dominio.FazendaRepository;
+import br.com.diegoalexandro.desafioagrojava.fazenda.exceptions.FazendaNaoEncontrada;
 import com.totvs.tjf.api.context.stereotype.ApiGuideline;
 import com.totvs.tjf.api.context.v2.request.ApiPageRequest;
 import com.totvs.tjf.api.context.v2.request.ApiSortRequest;
@@ -14,6 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -48,6 +51,14 @@ class FazendaController {
     @PostMapping
     public ResponseEntity<FazendaDTO> salvar(@RequestBody @Valid NovaFazendaRequest novaFazenda) {
         Fazenda fazenda = fazendaRepository.save(novaFazenda.toModel());
+        return ResponseEntity.ok(FazendaDTO.fromModel(fazenda));
+    }
+
+    @PutMapping("/{id}/{nome}")
+    public ResponseEntity<FazendaDTO> atualizar(@PathVariable("nome") @NotBlank @Unicidade(entidade = "Fazenda", campo = "nome") String nome, @PathVariable("id") String id) {
+        Fazenda fazenda = fazendaRepository.findById(UUID.fromString(id)).orElseThrow(() -> new FazendaNaoEncontrada(id));
+        fazenda.alterarNome(nome);
+        fazendaRepository.save(fazenda);
         return ResponseEntity.ok(FazendaDTO.fromModel(fazenda));
     }
 
